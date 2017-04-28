@@ -1,0 +1,22 @@
+.required {
+    border: 1px solid red;
+    background: #ffd8d8;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -ms-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+.filled {
+    border: 1px solid #15981e;
+    background: #bceac0;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -ms-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+#register-user label {
+    display: inline-block;
+    width: 250px;
+}
