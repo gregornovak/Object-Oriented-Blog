@@ -22,6 +22,7 @@ class Validate
     public function check($source, $fields = [])
     {
         foreach($fields as $field => $rules) {
+
             foreach($rules as $rule => $rule_value) {
 
                 $value = trim($source[$field]);

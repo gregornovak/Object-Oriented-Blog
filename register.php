@@ -5,7 +5,7 @@ require_once 'header.php';
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <form action="" method="post" id="register-user">
+            <form action="" method="post" id="register-user" enctype="multipart/form-data">
                 <div class="input-container">
                     <label for="username">Uporabniško ime</label>
                     <input type="text" id="username" name="username" value="<?php echo Input::get('username') ?>">
@@ -22,6 +22,10 @@ require_once 'header.php';
                     <label for="password2">Ponovite geslo</label>
                     <input type="password" id="password2" name="password2">
                 </div>
+                <div class="input-container">
+                    <label for="picture">Slika profila:</label>
+                    <input type="file" name="picture" id="picture">
+                </div>
                 <input type="submit" name="register" id="register-submit">
             </form>
         </div>
@@ -29,7 +33,7 @@ require_once 'header.php';
 </div>
 
 <?php
-
+if(Input::exists()) {
 $validate = new Validate();
 $validation = $validate->check( $_POST,
         [
@@ -42,7 +46,7 @@ $validation = $validate->check( $_POST,
             ],
             'email' => [
                 'required'  => true,
-                'max'       => 20,
+                'max'       => 40,
                 'unique'    => 'users',
                 'pretty'    => 'Email naslov'
             ],
@@ -56,26 +60,31 @@ $validation = $validate->check( $_POST,
                 'min'       => 6,
                 'matches'   => 'password1',
                 'pretty'    => 'Ponovite geslo'
-            ],
+            ]
         ]);
-var_dump($validation->errors());
-//if(Input::exists()) {
-//$a = new User();
-//var_dump($a->create([
-//    'username' => Input::get('username'),
-//    'email' => Input::get('email'),
-//    'password' => Input::get('password1'),
-//    'created' => Time::now(),
-//    'updated' => Time::now(),
-//    'last_login' => Time::now(),
-//    'registration_ip' => '88.11.1.5',
-//    'last_login_ip' => '88.11.1.5',
-//    'permissions_id' => 1
-//]));
-//
-//    echo Input::get('username') , '<br>';
-//    echo Input::get('email') , '<br>';
-//    echo Input::get('password1') , '<br>';
-//    echo Input::get('password2') , '<br>';
-//}
+    var_dump($validation->errors());
+
+
+
+    $a = new User();
+    if($validation->passed()) {
+        $pic = new Picture();
+        $a->create([
+            'username' => Input::get('username'),
+            'email' => Input::get('email'),
+            'password' => Hash::make(Input::get('password1')),
+            'created' => Time::now(),
+            'updated' => Time::now(),
+            'last_login' => Time::now(),
+            'registration_ip' => Client::ip(),
+            'last_login_ip' => Client::ip(),
+            'picture' => $pic->upload()
+
+        ]);
+
+    }
+
+
+}
+
 require_once 'footer.php';

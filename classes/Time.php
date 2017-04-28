@@ -9,7 +9,8 @@ class Time
      */
     public static function now()
     {
-        return new DateTime('now', new DateTimeZone(self::$_timeZone));
+        $now = new DateTime('now', new DateTimeZone(self::$_timeZone));
+        return $now->format('Y-m-d H:i:s');
     }
 
     /**
