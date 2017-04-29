@@ -1,10 +1,10 @@
 <?php
 
-class Picture
+class Picture extends Validate
 {
-    private $_db,
+    private /*$_db,
             $_errors,
-            $_passed,
+            $_passed,*/
             $_type,
             $_file_name,
             $_tmp_name,
@@ -14,17 +14,17 @@ class Picture
     /**
      * Picture constructor.
      */
-    public function __construct()
+    /*public function __construct()
     {
         return $this->_db = Database::getInstance();
-    }
+    }*/
 
     /**
      * @return bool
      */
     public function exists()
     {
-        return (isset($_FILES)) ? true : false;
+        return ($_FILES['picture']['size'] != 0 && $_FILES['picture']['error'] != 0) ? true : false;
     }
 
     /**
@@ -49,7 +49,7 @@ class Picture
     /**
      * @return $this
      */
-    private function checkType()
+    public function checkType()
     {
         if(isset($_FILES)) {
             $allowed    = ['jpg', 'jpeg', 'png', 'gif'];
@@ -71,6 +71,7 @@ class Picture
 
                 } else {
                     $this->_passed = false;
+                    echo get_class($this);
                     $this->addError('Velikost slike mora biti manjša od 2mb!');
                 }
             } else {
@@ -88,24 +89,27 @@ class Picture
     /**
      * @return mixed
      */
+     /*
     public function passed()
     {
         return $this->_passed;
-    }
+    }*/
 
     /**
      * @param $string
      */
+     /*
     public function addError($string)
     {
         $this->_errors[] = $string;
-    }
+    }*/
 
     /**
      * @return mixed
      */
+     /*
     public function getErrors()
     {
         return $this->_errors;
-    }
+    }*/
 }

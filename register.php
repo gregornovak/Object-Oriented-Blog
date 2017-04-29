@@ -34,6 +34,7 @@ require_once 'header.php';
 
 <?php
 if(Input::exists()) {
+
 $validate = new Validate();
 $validation = $validate->check( $_POST,
         [
@@ -62,13 +63,16 @@ $validation = $validate->check( $_POST,
                 'pretty'    => 'Ponovite geslo'
             ]
         ]);
-    var_dump($validation->errors());
-
 
 
     $a = new User();
-    if($validation->passed()) {
-        $pic = new Picture();
+    $pic = new Picture();
+    // if file has been uploaded -> validate fields for file and user information
+    if($pic->exists()) {
+        $pic->checkType();
+        if($validation->passed() && $pic->passed()) {
+        echo 'passed';
+        
         $a->create([
             'username' => Input::get('username'),
             'email' => Input::get('email'),
@@ -79,12 +83,42 @@ $validation = $validate->check( $_POST,
             'registration_ip' => Client::ip(),
             'last_login_ip' => Client::ip(),
             'picture' => $pic->upload()
-
         ]);
 
+        } else {
+            $errors1 = $validation->errors();
+            $errors2 = $pic->errors();
+            foreach($errors1 as $error) {
+                echo $error . '<br>';
+            }
+            foreach($errors2 as $error) {
+                echo $error . '<br>';
+            }
+        }
+        // else validate just the fields without the file check
+    } else {
+        if($validation->passed()) {
+            echo 'passed without picture';
+            $a->create([
+                'username' => Input::get('username'),
+                'email' => Input::get('email'),
+                'password' => Hash::make(Input::get('password1')),
+                'created' => Time::now(),
+                'updated' => Time::now(),
+                'last_login' => Time::now(),
+                'registration_ip' => Client::ip(),
+                'last_login_ip' => Client::ip()
+            ]);
+        } else {
+            $errors = $validation->errors();
+            foreach($errors as $error) {
+                echo $error . '<br>';
+            }
+        }
+        
+
     }
-
-
+    
 }
 
 require_once 'footer.php';
