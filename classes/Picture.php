@@ -22,9 +22,9 @@ class Picture extends Validate
     /**
      * @return bool
      */
-    public function exists()
+    public function exists($name)
     {
-        return ($_FILES['picture']['size'] != 0 && $_FILES['picture']['error'] != 0) ? true : false;
+        return ($_FILES[$name]['size'] != 0 && $_FILES[$name]['error'] == 0) ? true : false;
     }
 
     /**
@@ -62,7 +62,7 @@ class Picture extends Validate
             $file_exp   = explode('.', strtolower($name));
             $file_ext   = end($file_exp);
 
-            if(in_array($file_ext, $allowed) && $error == 0) {
+            if(in_array($file_ext, $allowed) && $error == 0 && count($file_exp) == 2) {
                 if($size <= $max_size) {
                     $this->_type        = $file_ext;
                     $this->_file_name   = $file_exp[0];

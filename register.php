@@ -5,7 +5,7 @@ require_once 'header.php';
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <form action="" method="post" id="register-user" enctype="multipart/form-data">
+            <form action="" class="users-form" method="post" id="register-user" enctype="multipart/form-data">
                 <div class="input-container">
                     <label for="username">Uporabniško ime</label>
                     <input type="text" id="username" name="username" value="<?php echo Input::get('username') ?>">
@@ -67,8 +67,9 @@ $validation = $validate->check( $_POST,
 
     $a = new User();
     $pic = new Picture();
-    // if file has been uploaded -> validate fields for file and user information
-    if($pic->exists()) {
+    // if file has been uploaded -> validate fields for file and user 
+
+    if($pic->exists('picture')) {
         $pic->checkType();
         if($validation->passed() && $pic->passed()) {
         echo 'passed';
