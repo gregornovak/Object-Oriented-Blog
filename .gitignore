@@ -1,5 +1,9 @@
 node_modules
+
 *.html
+
 mail
+
 .idea
+
 uploads/profile_pics/*
