@@ -157,8 +157,7 @@ class Database
     public function update($table, $fields = [], $where = [])
     {
         $this->_error = false;
-        // TO DO
-        // Preveri če to polje sploh obstaja v bazi najprej
+
         if($table && is_array($fields) && is_array($where)) {
             $fieldKeys  = array_keys($fields);
             $fieldCount = count($fields) - 1;
@@ -201,8 +200,6 @@ class Database
      */
     public function delete($table, $where = [])
     {
-        // TO DO
-        // Preveri če to polje sploh obstaja v bazi najprej
         $this->_error = false;
 
         if($table && is_array($where)) {

@@ -4,15 +4,19 @@ session_start();
 
 $GLOBALS['config'] = [
     'database' => [
-        'host'      => '127.0.0.1',
-        'username'  => 'root',
-        'password'  => '',
-        'db_table'  => 'blog',
-        'charset'   => 'utf8'
+        'host'          => '127.0.0.1',
+        'username'      => 'root',
+        'password'      => 'geslo123',
+        'db_table'      => 'blog',
+        'charset'       => 'utf8'
     ],
     'cookie' => [
         'cookie_name'   => 'hash',
         'cookie_expiry' => 86400
+    ],
+    'session' => [
+        'session_name'  => 'session',
+        'token_name'    => 'token'
     ]
 ];
 

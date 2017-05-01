@@ -2,24 +2,17 @@
 
 class Picture extends Validate
 {
-    private /*$_db,
-            $_errors,
-            $_passed,*/
-            $_type,
+    private $_type,
             $_file_name,
             $_tmp_name,
             $_full_name,
             $_file_destination;
 
     /**
-     * Picture constructor.
-     */
-    /*public function __construct()
-    {
-        return $this->_db = Database::getInstance();
-    }*/
-
-    /**
+     * Checks if file exists
+     *
+     * @param $name
+     *
      * @return bool
      */
     public function exists($name)
@@ -28,6 +21,8 @@ class Picture extends Validate
     }
 
     /**
+     * Uploads the picture
+     *
      * @return bool
      */
     public function upload()
@@ -47,6 +42,8 @@ class Picture extends Validate
     }
 
     /**
+     * Checks for file type, size
+     *
      * @return $this
      */
     public function checkType()
@@ -86,30 +83,4 @@ class Picture extends Validate
 
     }
 
-    /**
-     * @return mixed
-     */
-     /*
-    public function passed()
-    {
-        return $this->_passed;
-    }*/
-
-    /**
-     * @param $string
-     */
-     /*
-    public function addError($string)
-    {
-        $this->_errors[] = $string;
-    }*/
-
-    /**
-     * @return mixed
-     */
-     /*
-    public function getErrors()
-    {
-        return $this->_errors;
-    }*/
 }
