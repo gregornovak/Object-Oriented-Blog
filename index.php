@@ -6,6 +6,6 @@ require_once 'header.php';
 </div>
 
 <?php
-//var_dump(Token::make());
-var_dump(Token::exists());
+var_dump(Hash::email());
+var_dump(Hash::email());
 require_once 'footer.php';

@@ -21,9 +21,6 @@ class Validate
      */
     public function check($source, $fields = [])
     {
-        /*if($_SERVER['CONTENT_LENGTH'] > 2097152) {
-
-        }*/
         foreach($fields as $field => $rules) {
 
             foreach($rules as $rule => $rule_value) {
@@ -66,6 +63,12 @@ class Validate
                         case 'matches':
                             if($value != $source[$rule_value]) {
                                 $this->addError("Polji {$pretty} in {$fields[$rule_value]['pretty']} se morata ujemati!");
+                            }
+                        break;
+
+                        case 'format':
+                            if(filter_var($value, FILTER_VALIDATE_EMAIL) === false) {
+                                $this->addError("Vpisali ste neveljaven email naslov!");
                             }
                         break;
 

@@ -11,4 +11,9 @@ class Hash
     {
         return password_verify($password, $password_hash);
     }
+
+    public static function email()
+    {
+        return md5('email_verification' . uniqid());
+    }
 }

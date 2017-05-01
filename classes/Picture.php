@@ -23,11 +23,13 @@ class Picture extends Validate
     /**
      * Uploads the picture
      *
+     * @param $input_name
+     *
      * @return bool
      */
-    public function upload()
+    public function upload($input_name)
     {
-        if(!$this->checkType()) {
+        if(!$this->checkType($input_name)) {
             return null;
         }
         if($this->_passed) {
@@ -44,17 +46,19 @@ class Picture extends Validate
     /**
      * Checks for file type, size
      *
+     * @param $input_name
+     *
      * @return $this
      */
-    public function checkType()
+    public function checkType($input_name)
     {
         if(isset($_FILES)) {
             $allowed    = ['jpg', 'jpeg', 'png', 'gif'];
             $max_size   = 2097152; //2mb
-            $name       = $_FILES['picture']['name'];
-            $error      = $_FILES['picture']['error'];
-            $size       = $_FILES['picture']['size'];
-            $tmp_name   = $_FILES['picture']['tmp_name'];
+            $name       = $_FILES[$input_name]['name'];
+            $error      = $_FILES[$input_name]['error'];
+            $size       = $_FILES[$input_name]['size'];
+            $tmp_name   = $_FILES[$input_name]['tmp_name'];
 
             $file_exp   = explode('.', strtolower($name));
             $file_ext   = end($file_exp);

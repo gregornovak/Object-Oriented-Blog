@@ -2,9 +2,108 @@
 require_once 'header.php';
 
 if(Input::exists()) {
-    var_dump(Session::get('token'));
-    var_dump(Input::get('token'));
-    if(Token::exists(Input::get('token'))) {
+
+    if (Token::exists(Input::get('token'))) {
+        $validate = new Validate();
+        $validation = $validate->check($_POST,
+            [
+                'username' => [
+                    'required' => true,
+                    'min' => 4,
+                    'max' => 20,
+                    'unique' => 'users',
+                    'pretty' => 'Uporabniško ime'
+                ],
+                'email' => [
+                    'required' => true,
+                    'format' => 'email',
+                    'max' => 40,
+                    'unique' => 'users',
+                    'pretty' => 'Email naslov'
+                ],
+                'password1' => [
+                    'required' => true,
+                    'min' => 6,
+                    'pretty' => 'Geslo'
+                ],
+                'password2' => [
+                    'required' => true,
+                    'min' => 6,
+                    'matches' => 'password1',
+                    'pretty' => 'Ponovite geslo'
+                ]
+            ]);
+
+
+        $a = new User();
+        $pic = new Picture();
+        // if file has been uploaded -> validate fields for file and user
+
+        if ($pic->exists('picture')) {
+            $pic->checkType('picture');
+            if ($validation->passed() && $pic->passed()) {
+                echo 'passed';
+
+                if($a->create([
+                    'username'          => Input::get('username'),
+                    'email'             => Input::get('email'),
+                    'password'          => Hash::make(Input::get('password1')),
+                    'created'           => Time::now(),
+                    'updated'           => Time::now(),
+                    'last_login'        => Time::now(),
+                    'registration_ip'   => Client::ip(),
+                    'last_login_ip'     => Client::ip(),
+                    'picture'           => $pic->upload('picture'),
+                    'activation_hash'   => Input::get('activation_hash')
+                ])){
+                    if($a->sendActivationEmail(Input::get('email'), Input::get('username'))){
+                        Session::make('email_activation', 'Vaš račun je bil uspešno aktiviran!');
+                    } else {
+                        Session::make('email_activation', 'Vaš račun ni bil aktiviran, ker je prišlo do napake.');
+                    }
+                }
+
+            } else {
+                $errors1 = $validation->errors();
+                $errors2 = $pic->errors();
+                foreach ($errors1 as $error) {
+                    echo $error . '<br>';
+                }
+                foreach ($errors2 as $error) {
+                    echo $error . '<br>';
+                }
+            }
+            // else validate just the fields without the file check
+        } else {
+            if ($validation->passed()) {
+                echo 'passed without picture';
+                if($a->create([
+                    'username'          => Input::get('username'),
+                    'email'             => Input::get('email'),
+                    'password'          => Hash::make(Input::get('password1')),
+                    'created'           => Time::now(),
+                    'updated'           => Time::now(),
+                    'last_login'        => Time::now(),
+                    'registration_ip'   => Client::ip(),
+                    'last_login_ip'     => Client::ip(),
+                    'activation_hash'   => Input::get('activation_hash')
+                ])){
+                    if($a->sendActivationEmail(Input::get('email'), Input::get('username'))){
+                        Session::make('email_activation', 'Vaš račun je bil uspešno aktiviran!');
+                    } else {
+                        Session::make('email_activation', 'Vaš račun ni bil aktiviran, ker je prišlo do napake.');
+                    }
+                }
+            } else {
+                $errors = $validation->errors();
+                foreach ($errors as $error) {
+                    echo $error . '<br>';
+                }
+            }
+
+
+        }
+
 
     }
 }
@@ -35,6 +134,7 @@ if(Input::exists()) {
                     <input type="file" name="picture" id="picture">
                 </div>
                 <input type="hidden" name="token" value="<?php echo Token::make() ?>">
+                <input type="hidden" name="activation_hash" value="<?php echo Hash::email() ?>">
                 <input type="submit" name="register" id="register-submit">
             </form>
         </div>
@@ -42,97 +142,4 @@ if(Input::exists()) {
 </div>
 
 <?php
-//var_dump(Input::get('token'));
-//var_dump(Session::get('token'));
-
-
-//if(Input::exists()) {
-//
-//$validate = new Validate();
-//$validation = $validate->check( $_POST,
-//        [
-//            'username' => [
-//                'required'  => true,
-//                'min'       => 4,
-//                'max'       => 20,
-//                'unique'    => 'users',
-//                'pretty'    => 'Uporabniško ime'
-//            ],
-//            'email' => [
-//                'required'  => true,
-//                'max'       => 40,
-//                'unique'    => 'users',
-//                'pretty'    => 'Email naslov'
-//            ],
-//            'password1' => [
-//                'required'  => true,
-//                'min'       => 6,
-//                'pretty'    => 'Geslo'
-//            ],
-//            'password2' => [
-//                'required'  => true,
-//                'min'       => 6,
-//                'matches'   => 'password1',
-//                'pretty'    => 'Ponovite geslo'
-//            ]
-//        ]);
-//
-//
-//    $a = new User();
-//    $pic = new Picture();
-//    // if file has been uploaded -> validate fields for file and user
-//
-//    if($pic->exists('picture')) {
-//        $pic->checkType();
-//        if($validation->passed() && $pic->passed()) {
-//        echo 'passed';
-//
-//        $a->create([
-//            'username' => Input::get('username'),
-//            'email' => Input::get('email'),
-//            'password' => Hash::make(Input::get('password1')),
-//            'created' => Time::now(),
-//            'updated' => Time::now(),
-//            'last_login' => Time::now(),
-//            'registration_ip' => Client::ip(),
-//            'last_login_ip' => Client::ip(),
-//            'picture' => $pic->upload()
-//        ]);
-//
-//        } else {
-//            $errors1 = $validation->errors();
-//            $errors2 = $pic->errors();
-//            foreach($errors1 as $error) {
-//                echo $error . '<br>';
-//            }
-//            foreach($errors2 as $error) {
-//                echo $error . '<br>';
-//            }
-//        }
-//        // else validate just the fields without the file check
-//    } else {
-//        if($validation->passed()) {
-//            echo 'passed without picture';
-//            $a->create([
-//                'username' => Input::get('username'),
-//                'email' => Input::get('email'),
-//                'password' => Hash::make(Input::get('password1')),
-//                'created' => Time::now(),
-//                'updated' => Time::now(),
-//                'last_login' => Time::now(),
-//                'registration_ip' => Client::ip(),
-//                'last_login_ip' => Client::ip()
-//            ]);
-//        } else {
-//            $errors = $validation->errors();
-//            foreach($errors as $error) {
-//                echo $error . '<br>';
-//            }
-//        }
-//
-//
-//    }
-    
-//}
-
 require_once 'footer.php';
