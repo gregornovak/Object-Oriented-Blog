@@ -6,7 +6,7 @@ $GLOBALS['config'] = [
     'database' => [
         'host'      => '127.0.0.1',
         'username'  => 'root',
-        'password'  => 'geslo123',
+        'password'  => '',
         'db_table'  => 'blog',
         'charset'   => 'utf8'
     ],

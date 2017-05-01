@@ -2,7 +2,7 @@
 
 class Validate
 {
-    private $_db = null,
+    protected $_db = null,
             $_errors = [],
             $_passed;
 
@@ -21,6 +21,9 @@ class Validate
      */
     public function check($source, $fields = [])
     {
+        /*if($_SERVER['CONTENT_LENGTH'] > 2097152) {
+
+        }*/
         foreach($fields as $field => $rules) {
 
             foreach($rules as $rule => $rule_value) {
@@ -83,7 +86,7 @@ class Validate
     /**
      * @param $error
      */
-    private function addError($error)
+    protected function addError($error)
     {
         $this->_errors[] = $error;
     }

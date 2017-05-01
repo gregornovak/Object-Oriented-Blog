@@ -16,7 +16,7 @@
     -o-transition: all 0.3s ease-in;
     transition: all 0.3s ease-in;
 }
-#register-user label {
-    display: inline-block;
-    width: 250px;
+.users-form label {
+    display: block;
 }
+body {background:Red;}
