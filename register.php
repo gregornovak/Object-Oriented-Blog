@@ -57,9 +57,9 @@ if(Input::exists()) {
                     'activation_hash'   => Input::get('activation_hash')
                 ])){
                     if($a->sendActivationEmail(Input::get('email'), Input::get('username'))){
-                        Session::make('email_activation', 'Vaš račun je bil uspešno aktiviran!');
+                        Session::flash('email_activation', 'Vaš račun je bil uspešno aktiviran!');
                     } else {
-                        Session::make('email_activation', 'Vaš račun ni bil aktiviran, ker je prišlo do napake.');
+                        Session::flash('email_activation', 'Vaš račun ni bil aktiviran, ker je prišlo do napake.');
                     }
                 }
 
@@ -89,9 +89,9 @@ if(Input::exists()) {
                     'activation_hash'   => Input::get('activation_hash')
                 ])){
                     if($a->sendActivationEmail(Input::get('email'), Input::get('username'))){
-                        Session::make('email_activation', 'Vaš račun je bil uspešno aktiviran!');
+                        Session::flash('email_activation', 'Vaš račun je bil uspešno aktiviran!');
                     } else {
-                        Session::make('email_activation', 'Vaš račun ni bil aktiviran, ker je prišlo do napake.');
+                        Session::flash('email_activation', 'Vaš račun ni bil aktiviran, ker je prišlo do napake.');
                     }
                 }
             } else {
@@ -137,6 +137,15 @@ if(Input::exists()) {
                 <input type="hidden" name="activation_hash" value="<?php echo Hash::email() ?>">
                 <input type="submit" name="register" id="register-submit">
             </form>
+            <div class="errors">
+                <?php
+                    if(!$validation->passed()) {
+                        foreach($validation->errors() as $error) {
+                            echo $error . '<br>';
+                        }
+                    }
+                ?>
+            </div>
         </div>
     </div>
 </div>

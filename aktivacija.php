@@ -14,9 +14,8 @@ if(Input::exists()) {
     if($validation->passed()) {
         $user = new User();
         if($user->find(['email', '=', Input::get('email'), 'AND', 'activation_hash', '=', Input::get('hash')])){
-            // TO DO naredi update metodo za uporabnike ter redirectaj na home page
-            $user->update();
-            Redirect::to();
+            $user->update(['active', '=', '1']);
+            Redirect::to('index.php');
         } else {
             echo 'Ta uporabnik ne obstaja!';
         }

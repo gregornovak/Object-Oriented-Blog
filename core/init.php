@@ -12,10 +12,10 @@ $GLOBALS['config'] = [
     ],
     'cookie' => [
         'cookie_name'   => 'hash',
-        'cookie_expiry' => 86400
+        'cookie_expiry' => '86400'
     ],
     'session' => [
-        'session_name'  => 'session',
+        'session_name'  => 'user',
         'token_name'    => 'token'
     ],
     'email' => [
@@ -27,3 +27,13 @@ $GLOBALS['config'] = [
 spl_autoload_register(function($class){
     require_once 'classes' . DIRECTORY_SEPARATOR . $class . '.php';
 });
+
+if(Cookie::exists(Config::get('remember/cookie_name')) && !Session::exists(Config::get('session/session_name'))) {
+    $hash = Cookie::get(Config::get('remember/cookie_name'));
+    $hashCheck = Database::getInstance()->select('users_sessions', ['hash', '=', $hash]);
+
+    if($hashCheck->count()) {
+        $user = new User($hashCheck->first()->user_id);
+        $user->login();
+    }
+}
