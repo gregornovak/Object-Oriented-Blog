@@ -1,5 +1,6 @@
 <?php
 require_once 'core/init.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="sl">
@@ -7,10 +8,10 @@ require_once 'core/init.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Blog">
+    <meta name="author" content="Gregor Novak">
 
-    <title>Clean Blog</title>
+    <title>Blog</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="lib/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -23,8 +24,6 @@ require_once 'core/init.php';
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -50,23 +49,29 @@ require_once 'core/init.php';
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="index.php">Home</a>
+                    <a href="index.php">Domov</a>
                 </li>
                 <li>
-                    <a href="login.php">Login</a>
+                    <a href="#">O meni</a>
                 </li>
                 <li>
-                    <a href="register.php">Register</a>
+                    <a href="#">Vse objave</a>
                 </li>
                 <li>
-                    <a href="about.html">About</a>
+                    <a href="#">Contact</a>
                 </li>
-                <li>
-                    <a href="post.html">Sample Post</a>
-                </li>
-                <li>
-                    <a href="contact.html">Contact</a>
-                </li>
+                <?php if(Session::exists('user')): ?>
+                    <li>
+                        <a href="logout.php">Odjava</a>
+                    </li>
+                <?php else: ?>
+                    <li>
+                        <a href="login.php">Prijava</a>
+                    </li>
+                    <li>
+                        <a href="register.php">Registracija</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
@@ -85,3 +90,5 @@ require_once 'core/init.php';
         </div>
     </div>
 </header>
+
+<?php var_dump($_SESSION) ?>

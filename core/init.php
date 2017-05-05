@@ -20,7 +20,7 @@ $GLOBALS['config'] = [
     ],
     'email' => [
         'type'          => 'MIME-Version: 1.0' . "\r\n" . 'Content-type: text/html; charset=utf-8' . "\r\n",
-        'from'          => 'From: Info info@gregornovak.si' . "\r\n" // TO DO spremeni email
+        'from'          => 'From: Info info@gregornovak.si' . "\r\n"
     ]
 ];
 

@@ -2,28 +2,47 @@
 require_once 'core/init.php';
 require_once 'header.php';
 
+$user = new User();
+if($user->isLoggedIn()) {
+    Redirect::to('index.php');
+}
+
 if(Input::exists()) {
-    $validation = new Validate();
-    $validate = $validation->check($_POST, [
-        'email' => [
-            'required'  => true,
-            'format'    => 'email',
-            'max'       => 40,
-            'pretty'    => 'Email naslov'
-        ],
-        'password'  => [
-            'required'  => true,
-            'min'       => 6,
-            'pretty'    => 'Geslo'
-        ]
-    ]);
+    if(Token::exists(Input::get('token'))) {
+        $validation = new Validate();
+        $validate = $validation->check($_POST, [
+            'email' => [
+                'required'  => true,
+                'format'    => 'email',
+                'max'       => 40,
+                'pretty'    => 'Email naslov'
+            ],
+            'password'  => [
+                'required'  => true,
+                'min'       => 6,
+                'pretty'    => 'Geslo'
+            ]
+        ]);
 
-    if($validate->passed()) {
-        $user = new User();
-        $user->login();
+        if($validate->passed()) {
+            $remember_me = Input::get('remember') == 'on' ? true : false;
+            $user = new User();
+            $user->login(Input::get('email'), Input::get('password'), $remember_me);
+            if($user) {
+                Session::flash('login_successful', 'Prijava je bila uspešna!');
+                Redirect::to('index.php');
+            } else {
+                echo 'Prijava je bila neuspešna!';
+            }
+
+        } else {
+            $errors = $validate->errors();
+            foreach($errors as $error) {
+                echo $error;
+            }
+        }
+
     }
-
-
 }
 ?>
 
@@ -49,8 +68,6 @@ if(Input::exists()) {
             </div>
         </div>
     </div>
-
-    <div style="height:500px; background: #666;"></div>
 
 <?php
 require_once 'footer.php';

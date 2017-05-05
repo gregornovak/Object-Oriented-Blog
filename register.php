@@ -1,6 +1,11 @@
 <?php
 require_once 'header.php';
 
+$user = new User();
+if($user->isLoggedIn()) {
+    Redirect::to('index.php');
+}
+
 if(Input::exists()) {
 
     if (Token::exists(Input::get('token'))) {
@@ -57,9 +62,10 @@ if(Input::exists()) {
                     'activation_hash'   => Input::get('activation_hash')
                 ])){
                     if($a->sendActivationEmail(Input::get('email'), Input::get('username'))){
-                        Session::flash('email_activation', 'Vaš račun je bil uspešno aktiviran!');
+                        Session::flash('email_activation', 'Na vaš email naslov smo vam poslali povezavo do aktivacije računa!');
                     } else {
-                        Session::flash('email_activation', 'Vaš račun ni bil aktiviran, ker je prišlo do napake.');
+                        echo 'Prišlo je do napake pri pošiljanju aktivacijskega emaila.';
+//                        Session::flash('email_activation', 'Vaš račun ni bil aktiviran, ker je prišlo do napake.');
                     }
                 }
 
@@ -89,9 +95,10 @@ if(Input::exists()) {
                     'activation_hash'   => Input::get('activation_hash')
                 ])){
                     if($a->sendActivationEmail(Input::get('email'), Input::get('username'))){
-                        Session::flash('email_activation', 'Vaš račun je bil uspešno aktiviran!');
+                        Session::flash('email_activation', 'Na vaš email naslov smo vam poslali povezavo do aktivacije računa!');
                     } else {
-                        Session::flash('email_activation', 'Vaš račun ni bil aktiviran, ker je prišlo do napake.');
+//                        Session::flash('email_activation', 'Vaš račun ni bil aktiviran, ker je prišlo do napake.');
+                        echo 'Prišlo je do napake pri pošiljanju aktivacijskega emaila.';
                     }
                 }
             } else {
@@ -101,12 +108,9 @@ if(Input::exists()) {
                 }
             }
 
-
         }
 
-
     }
-
     echo Session::get('email');
 }
 ?>

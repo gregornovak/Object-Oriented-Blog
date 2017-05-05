@@ -17,9 +17,9 @@ class User
 
         if(!$user) {
             if(Session::exists($this->_session_name)) {
-                $user = Session::get($this->_session_name);
+                $user = Session::get($this->_session_name)['user_id'];
 
-                if($this->find($user)) {
+                if($this->find(['id', $user])) {
                     $this->_isLoggedIn = true;
 
                 } else {
@@ -76,15 +76,19 @@ class User
         return true;
     }
 
-    public function login($username = null, $password = null, $remember = false)
+    public function login($email = null, $password = null, $remember = false)
     {
-        if(!$username && !$password && $this->exists()) {
+        if(!$email && !$password && $this->exists()) {
             Session::make($this->_session_name, $this->data()->id);
         } else {
-            $user = $this->find($username);
+            $user = $this->find(['email',$email]);
             if($user) {
                 if($this->data()->password == Hash::check($password, $this->_data->password)) {
-                    Session::make($this->_session_name, $this->data()->id);
+                    Session::make($this->_session_name, [
+                        'user_id'   => $this->data()->id,
+                        'username'  => $this->data()->username,
+                        'email'     => $this->data()->email
+                    ]);
                     if($remember) {
                         $hash = Hash::unique();
                         $hashCheck = $this->_db->select('users_sessions', ['user_id', '=', $this->data()->id]);
@@ -115,6 +119,7 @@ class User
         Cookie::delete($this->_cookie_name);
     }
 
+    // spremeni dovoljenja da je samo admin
     public function hasPermission($key)
     {
         $group = $this->_db->select('groups', ['id', '=', $this->data()->groupNum]);

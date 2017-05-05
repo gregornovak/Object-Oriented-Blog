@@ -23,7 +23,7 @@ class Session
      */
     public static function get($name)
     {
-        return (isset($_SESSION[$name])) ? $_SESSION[$name] : false;
+        return $_SESSION[$name];
     }
 
     /**
@@ -37,7 +37,7 @@ class Session
      */
     public static function make($name, $value)
     {
-        return (isset($name) && isset($value)) ? $_SESSION[$name] = $value : false;
+        return $_SESSION[$name] = $value;
     }
 
     /**
@@ -71,6 +71,5 @@ class Session
             self::make($name, $msg);
         }
     }
-
 
 }
