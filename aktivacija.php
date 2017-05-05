@@ -14,8 +14,10 @@ if(Input::exists()) {
     if($validation->passed()) {
         $user = new User();
         if($user->find(['email', '=', Input::get('email'), 'AND', 'activation_hash', '=', Input::get('hash')])){
-            $user->update(['active', '=', '1']);
-            Redirect::to('index.php');
+            if($user->update(['active' => 1], ['activation_hash' => Input::get('hash')])) {
+                Session::flash('registration_completed', 'Vaš račun je bil uspešno aktiviran!');
+                Redirect::to('index.php');
+            }
         } else {
             echo 'Ta uporabnik ne obstaja!';
         }

@@ -68,17 +68,12 @@ class User
         return true;
     }
 
-    public function update($fields = [], $id = null)
+    public function update($fields = [], $where = [])
     {
-        if(!$id && $this->isLoggedIn()) {
-            $id = $this->data()->id;
-        }
-        if(!$this->_db->update($this->_table, $fields, $id)) {
+        if(!$this->_db->update($this->_table, $fields, $where)) {
             throw new Exception('Prišlo je do napake pri posodabljanju vašega računa.');
         }
-//        if(!$this->_db->update($this->_table, $id, $fields)) {
-//            throw new Exception('Prišlo je do napake pri posodabljanju vašega računa.');
-//        }
+        return true;
     }
 
     public function login($username = null, $password = null, $remember = false)

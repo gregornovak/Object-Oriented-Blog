@@ -106,6 +106,8 @@ if(Input::exists()) {
 
 
     }
+
+    echo Session::get('email');
 }
 ?>
 
@@ -137,15 +139,6 @@ if(Input::exists()) {
                 <input type="hidden" name="activation_hash" value="<?php echo Hash::email() ?>">
                 <input type="submit" name="register" id="register-submit">
             </form>
-            <div class="errors">
-                <?php
-                    if(!$validation->passed()) {
-                        foreach($validation->errors() as $error) {
-                            echo $error . '<br>';
-                        }
-                    }
-                ?>
-            </div>
         </div>
     </div>
 </div>

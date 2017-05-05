@@ -6,14 +6,7 @@ require_once 'header.php';
 </div>
 
 <?php
-$u = new User();
-var_dump($u->create(['username'          => Input::get('username'),
-    'email'             => Input::get('email'),
-    'password'          => Hash::make(Input::get('password1')),
-    'created'           => Time::now(),
-    'updated'           => Time::now(),
-    'last_login'        => Time::now(),
-    'registration_ip'   => Client::ip(),
-    'last_login_ip'     => Client::ip(),
-    'activation_hash'   => Input::get('activation_hash')]));
+if(Session::exists('registration_completed')) {
+    echo Session::get('registration_completed');
+}
 require_once 'footer.php';

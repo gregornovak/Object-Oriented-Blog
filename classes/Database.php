@@ -18,7 +18,7 @@ class Database
            $this->_pdo = new PDO(
                'mysql:host=' . Config::get('database/host') . ';' .
                'dbname=' . Config::get('database/db_table') . ';' .
-               'charset' . Config::get('database/charset') ,
+               'charset=' . Config::get('database/charset') ,
                Config::get('database/username') ,
                Config::get('database/password')
            );
