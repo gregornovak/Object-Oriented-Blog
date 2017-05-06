@@ -1,3 +1,9 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    height: 100vh;
+    flex-direction: column;
+}
 .required {
     border: 1px solid red;
     background: #ffd8d8;
@@ -18,4 +24,11 @@
 }
 .users-form label {
     display: block;
+}
+#error-page {
+    height: calc(100vh)
+}
+.main-wrapper {
+    flex: 1 0 auto;
+    background-color: #f9f9f9;
 }
