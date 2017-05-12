@@ -3,32 +3,373 @@ body {
     min-height: 100vh;
     height: 100vh;
     flex-direction: column;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-.required {
-    border: 1px solid red;
-    background: #ffd8d8;
-    -webkit-transition: all 0.3s ease-in;
-    -moz-transition: all 0.3s ease-in;
-    -ms-transition: all 0.3s ease-in;
-    -o-transition: all 0.3s ease-in;
-    transition: all 0.3s ease-in;
+input, label, button {
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
 }
-.filled {
-    border: 1px solid #15981e;
-    background: #bceac0;
-    -webkit-transition: all 0.3s ease-in;
-    -moz-transition: all 0.3s ease-in;
-    -ms-transition: all 0.3s ease-in;
-    -o-transition: all 0.3s ease-in;
-    transition: all 0.3s ease-in;
-}
+/*.required {*/
+    /*border: 1px solid red;*/
+    /*background: #ffd8d8;*/
+    /*-webkit-transition: all 0.3s ease-in;*/
+    /*-moz-transition: all 0.3s ease-in;*/
+    /*-ms-transition: all 0.3s ease-in;*/
+    /*-o-transition: all 0.3s ease-in;*/
+    /*transition: all 0.3s ease-in;*/
+/*}*/
+/*.filled {*/
+    /*border: 1px solid #15981e;*/
+    /*background: #bceac0;*/
+    /*-webkit-transition: all 0.3s ease-in;*/
+    /*-moz-transition: all 0.3s ease-in;*/
+    /*-ms-transition: all 0.3s ease-in;*/
+    /*-o-transition: all 0.3s ease-in;*/
+    /*transition: all 0.3s ease-in;*/
+/*}*/
 .users-form label {
     display: block;
 }
-#error-page {
-    height: calc(100vh)
+.navbar-toggle-custom {
+    border: none;
 }
 .main-wrapper {
+    padding-top: 60px;
     flex: 1 0 auto;
-    background-color: #f9f9f9;
+}
+.index-wrapper {
+    flex: 1 0 auto;
+}
+.not-home {
+    background: #fff;
+    margin: 0;
+    -webkit-box-shadow: 5px 0 10px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 5px 0 10px 2px rgba(0,0,0,.2);
+    box-shadow: 5px 0 10px 2px rgba(0,0,0,.2);
+}
+.not-home .navbar-brand, .not-home .nav li a {
+    color: black;
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    -ms-transition: color 0.2s ease;
+    -o-transition: color 0.2s ease;
+    transition: color 0.2s ease;
+}
+.navbar-custom .nav li a, .navbar-custom .navbar-brand {
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    -ms-transition: color 0.2s ease;
+    -o-transition: color 0.2s ease;
+    transition: color 0.2s ease;
+}
+.not-home .nav li a:focus, .not-home .nav li a:hover, .not-home .navbar-brand:focus, .not-home .navbar-brand:hover {
+    color: #2196F3;
+}
+.navbar-custom .nav li a:focus, .navbar-custom .nav li a:hover, .navbar-custom .navbar-brand:focus, .navbar-custom .navbar-brand:hover {
+    color: #2196F3;
+}
+footer {
+    background: #2196F3;
+    -webkit-box-shadow: 0 -4px 30px 1px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 -4px 30px 1px rgba(0,0,0,.2);
+    box-shadow: 0 -4px 30px 1px rgba(0,0,0,.2);
+}
+footer .copyright {
+    color: #f9f9f9;
+}
+.contact-me {
+    background: #4CAF50;
+}
+.contact-me .contact-hr {
+    border: none;
+    height: 5px;
+    width: 100%;
+    background: #146936;
+}
+.contact-me .contact-me-h {
+    color: #fff;
+    text-shadow: 0 4px #146936;
+    margin-top: 45px;
+}
+.contact-me .form-group label {
+    color: #fff;
+    text-shadow: 0 3px #146936;
+}
+.contact-me .form-control-custom {
+    box-shadow: 6px 6px #146936;
+    font-size: 19px;
+    border-radius: 0;
+    border: none;
+    height: 40px;
+    color: #146936;
+    -webkit-transition: box-shadow 0.3s ease-in-out;
+    -moz-transition: box-shadow 0.3s ease-in-out;
+    -ms-transition: box-shadow 0.3s ease-in-out;
+    -o-transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out;
+}
+.contact-me .form-control-custom:active, .contact-me .form-control-custom:focus {
+    outline: none;
+    box-shadow: 0 0 0 6px #146936;
+}
+.contact-me .btn-contact {
+    border: none;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -ms-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    color: #146936;
+}
+.contact-me .btn-contact:focus, .btn-contact:hover {
+    background-color: #146936;
+    border: none;
+    color: #fff;
+}
+.contact-me #message {
+    height: initial;
+}
+#error-page {
+    background: #ff4c4c;
+}
+#error-page > div {
+    margin-top: 200px;
+}
+#error-page h1 {
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 5px #bf1515;
+}
+#error-404 {
+    font-size: 200px;
+    line-height: 200px;
+    height: 200px;
+    color: #d04040;
+    text-align: center;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.register-wrapper {
+    background: #0073ce;
+}
+.main-wrapper .auth-center {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 25px 0;
+}
+.main-wrapper .auth-center .input-container {
+    margin: 5px 0 15px;
+}
+.main-wrapper .auth-heading {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 4px #093c67;
+}
+.main-wrapper .auth-labels {
+    color: #fff;
+    text-shadow: 0 3px #093c67;
+}
+.main-wrapper .auth-inputs {
+    width: 100%;
+    border: none;
+    box-shadow: 6px 6px #093c67;
+    font-size: 19px;
+    height: 40px;
+    padding: 0 10px;
+    -webkit-transition: box-shadow 0.3s ease-in-out;
+    -moz-transition: box-shadow 0.3s ease-in-out;
+    -ms-transition: box-shadow 0.3s ease-in-out;
+    -o-transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out;
+}
+.main-wrapper .auth-inputs:active, .main-wrapper .auth-inputs:focus {
+    outline: none;
+    box-shadow: 0 0 0 6px #093c67;
+}
+.main-wrapper .auth-cross {
+    border: none;
+    height: 5px;
+    width: 50px;
+    box-shadow: 0 0 0 2px #093c67;
+    background: #fff;
+    margin: 0;
+}
+.main-wrapper .cross-wrapper {
+    position: relative;
+    height: 50px;
+    width: 100%;
+}
+.main-wrapper .cross-wrapper::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.main-wrapper .cross-wrapper .auth-cross {
+    position: absolute;
+    top: 25px;
+    left: 175px;
+}
+.main-wrapper .cross-wrapper .cross1 {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.main-wrapper .cross-wrapper .cross2 {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.main-wrapper .file-input-container input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.main-wrapper .file-input-container .file-label {
+    height: 40px;
+    width: 100%;
+    background: #fff;
+    color: #093c67;
+    text-shadow: none;
+    box-shadow: 6px 6px #093c67;
+    margin: 40px 0 0 0;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.main-wrapper .file-input-container .file-picture {
+    margin: 0 15px;
+    vertical-align: middle;
+}
+.main-wrapper .file-input-container .file-label:hover, .main-wrapper .file-input-container .file-label:focus {
+    background: #093c67;
+    color: #fff;
+    box-shadow: 0 0 #093c67;
+}
+.main-wrapper #register-submit {
+    border: none;
+    background: #093c67;
+    color: #fff;
+    height: 40px;
+    width: 100%;
+    font-weight: bold;
+    box-shadow: 6px 6px #fff;
+    margin: 25px 0;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.main-wrapper #register-submit:hover, .main-wrapper #register-submit:focus {
+    background: #fff;
+    color: #093c67;
+    box-shadow: 0 0 #fff;
+}
+.login-wrapper {
+    background: #FF9800;
+}
+.login-wrapper .auth-labels {
+    text-shadow: 0 3px #6f5300;
+}
+.login-wrapper .auth-heading {
+    text-shadow: 0 4px #6f5300;
+}
+.login-wrapper .auth-inputs {
+    box-shadow: 6px 6px #a26915
+}
+.login-wrapper .auth-inputs:active, .login-wrapper .auth-inputs:focus {
+    outline: none;
+    box-shadow: 0 0 0 6px #6f5300;
+}
+.login-wrapper #login-submit {
+    border: none;
+    background: #a26915;
+    color: #fff;
+    height: 40px;
+    width: 100%;
+    font-weight: bold;
+    box-shadow: 6px 6px #fff;
+    margin: 25px 0;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.login-wrapper #login-submit:hover, .login-wrapper #login-submit:focus {
+    background: #fff;
+    color: #a26915;
+    box-shadow: 0 0 #fff;
+}
+.login-wrapper .input-container:nth-child(3) label {
+    display: inline-block;
+}
+.login-wrapper #remember {
+    display: inline-block;
+    box-shadow: none;
+    width: 40px;
+    vertical-align: bottom;
+}
+.contact-me #contact-response {
+    box-shadow: 6px 6px #bb1f1f;
+    font-size: 19px;
+    border-radius: 0;
+    border: none;
+    height: 40px;
+    color: #bb1f1f;
+    background: white;
+    display: none;
+    margin-bottom: 25px;
+    padding: 6px 12px;
+}
+.required {
+    color: #31ceff;
+    text-shadow: none;
+}
+.required-fields {
+    color: #31ceff;
+    font-weight: bold;
+    text-shadow: 0 2px #045c77;
+    font-size: 16px;
+}
+.err {
+    background: #fff;
+    margin: 5px 0;
+    color: red;
+    padding: 6px 12px;
+}
+@media (max-width: 500px) {
+    #error-page > div {
+        margin-top: 100px;
+        padding: 0 20px;
+    }
+    #error-page h1 {
+        font-size: 30px;
+    }
+    footer {
+        padding: 40px 0 40px;
+    }
+}
+@media (max-width: 400px) {
+    #error-page h1 {
+        font-size: 26px;
+    }
+    #error-404 {
+        font-size: 150px;
+    }
 }

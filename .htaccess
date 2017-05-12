@@ -1,6 +1,1 @@
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
-errorDocument 400 https://gregornovak.si/napaka
-errorDocument 401 https://gregornovak.si/napaka
-errorDocument 404 https://gregornovak.si/napaka
+RewriteEngine OnRewriteCond %{HTTPS} offRewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]RewriteCond %{REQUEST_FILENAME} !-fRewriteCond %{REQUEST_FILENAME} !-dRewriteRule ^([^\.]+)$ $1.php [NC,L]errorDocument 400 https://gregornovak.si/napakaerrorDocument 401 https://gregornovak.si/napakaerrorDocument 404 https://gregornovak.si/napaka

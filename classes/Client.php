@@ -38,4 +38,12 @@ class Client
         preg_match($reg, $_SERVER['HTTP_USER_AGENT'], self::$_os);
         return self::$_os[0];
     }
+
+    public static function isHome()
+    {
+        return ($_SERVER['REQUEST_URI'] == '/index.php')
+                || ($_SERVER['REQUEST_URI'] == '/index')
+                || ($_SERVER['REQUEST_URI'] == '/')
+                ? true : false ;
+    }
 }

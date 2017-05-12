@@ -1,6 +1,5 @@
 <?php
 require_once 'core/init.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="sl">
@@ -10,6 +9,13 @@ require_once 'core/init.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Blog">
     <meta name="author" content="Gregor Novak">
+
+    <meta name="theme-color" content="#2196F3">
+    <meta name="msapplication-navbutton-color" content="#2196F3">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#2196F3">
+
+    <link rel="icon" href="lib/favicon/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="lib/favicon/favicon.ico" type="image/x-icon"/>
 
     <title>Blog</title>
 
@@ -29,47 +35,40 @@ require_once 'core/init.php';
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="lib/js/main.js"></script>
+<!--    <script src="lib/js/main.js"></script>-->
     <link href="lib/css/styles.css" rel="stylesheet">
 </head>
 
 <body>
-
-<nav class="navbar navbar-default <?php if($_SERVER['REQUEST_URI'] == ('/' || 'index.php' || 'index')) { echo 'navbar-custom navbar-fixed-top'; } ?>">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top <?php if(!Client::isHome()) { echo 'not-home'; } ?>">
     <div class="container-fluid">
         <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle navbar-toggle-custom" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
-                Menu <i class="fa fa-bars"></i>
+                <i class="fa fa-bars fa-2x"></i>
             </button>
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <a class="navbar-brand" href="/">Gregor Novak</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+<!--                <li>-->
+<!--                    <a href="#">Vse objave</a>-->
+<!--                </li>-->
                 <li>
-                    <a href="index.php">Domov</a>
-                </li>
-                <li>
-                    <a href="#">O meni</a>
-                </li>
-                <li>
-                    <a href="#">Vse objave</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
+                    <a href="kontakt">Kontakt</a>
                 </li>
                 <?php if(Session::exists('user')): ?>
                     <li>
-                        <a href="logout.php">Odjava</a>
+                        <a href="odjava">Odjava</a>
                     </li>
                 <?php else: ?>
                     <li>
-                        <a href="login.php">Prijava</a>
+                        <a href="prijava">Prijava</a>
                     </li>
                     <li>
-                        <a href="register.php">Registracija</a>
+                        <a href="registracija">Registracija</a>
                     </li>
                 <?php endif; ?>
             </ul>

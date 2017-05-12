@@ -46,6 +46,7 @@ if(Input::exists()) {
 }
 ?>
 
+<div class="main-wrapper">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -68,6 +69,7 @@ if(Input::exists()) {
             </div>
         </div>
     </div>
+</div>
 
 <?php
 require_once 'footer.php';

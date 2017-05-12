@@ -45,7 +45,7 @@ class Session
      *
      * @param $name
      */
-    public static function delete($name)
+    public static function del($name)
     {
         if(self::exists($name)) {
             unset($_SESSION[$name]);
@@ -65,7 +65,7 @@ class Session
     {
         if(self::exists($name)) {
             $session = self::get($name);
-            self::delete($name);
+            self::del($name);
             return $session;
         } else {
             self::make($name, $msg);

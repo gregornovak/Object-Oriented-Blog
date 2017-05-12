@@ -9,7 +9,7 @@ class Redirect
                 switch($location) {
                     case 404:
                         header("HTTP/1.0 404 Not Found");
-                        include '..' . DIRECTORY_SEPARATOR . 'napaka.php';
+                        include '..' . DIRECTORY_SEPARATOR . '404.php';
                         exit();
                         break;
                 }
